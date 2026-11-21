@@ -204,3 +204,106 @@ if (skillsOrbit && skillsButton && skillsItems) {
         }
     });
 }
+
+// GitHub API: UniLink
+const githubContainer = document.querySelector("#github-repositories");
+const githubStatus = document.querySelector("#github-status");
+const githubRetry = document.querySelector("#github-retry");
+
+async function loadUniLink() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
+    githubStatus.textContent = "Loading UniLink...";
+    githubContainer.setAttribute("aria-busy", "true");
+
+    githubRetry.hidden = true;
+    githubRetry.disabled = true;
+
+    const previousCard = githubContainer.querySelector("#unilink-card");
+
+    if (previousCard) {
+        previousCard.remove();
+    }
+
+    try {
+        const response = await fetch(
+            "https://api.github.com/repos/amal-almahmud/UniLink",
+            {
+                headers: {
+                    Accept: "application/vnd.github+json"
+                },
+                signal: controller.signal
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("GitHub request failed.");
+        }
+
+        const project = await response.json();
+
+        if (
+            !project ||
+            typeof project.name !== "string" ||
+            typeof project.html_url !== "string"
+        ) {
+            throw new Error("Unexpected GitHub response.");
+        }
+
+        // The entire card is one clickable link.
+        const card = document.createElement("a");
+        card.className = "project-card";
+        card.id = "unilink-card";
+        card.href = project.html_url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+
+        // UniLink cover
+        const cover = document.createElement("div");
+        cover.className = "project-image unilink-cover";
+        cover.setAttribute("aria-hidden", "true");
+
+        const logo = document.createElement("span");
+        logo.className = "unilink-logo";
+        logo.textContent = "U";
+
+        cover.append(logo);
+
+        const title = document.createElement("h3");
+        title.textContent = project.name;
+
+        const description = document.createElement("p");
+        description.className = "project-description";
+        description.textContent =
+            project.description ||
+            "Explore the UniLink source code on GitHub.";
+
+        const details = document.createElement("p");
+        details.className = "project-meta";
+        details.textContent = " · Frontend prototype";
+
+        const action = document.createElement("strong");
+        action.className = "project-action";
+        action.textContent = "View on GitHub ↗";
+
+        card.append(cover, title, description, details, action);
+        githubContainer.append(card);
+
+        githubStatus.textContent = "";
+    } catch (error) {
+        githubStatus.textContent =
+            error.name === "AbortError"
+                ? "GitHub took too long to respond. Please try again."
+                : "Unable to load UniLink. Please try again later.";
+
+        githubRetry.hidden = false;
+    } finally {
+        clearTimeout(timeout);
+        githubContainer.setAttribute("aria-busy", "false");
+        githubRetry.disabled = false;
+    }
+}
+
+githubRetry.addEventListener("click", loadUniLink);
+loadUniLink();

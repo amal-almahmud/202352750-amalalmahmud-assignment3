@@ -138,40 +138,29 @@
 
         <!-- Projects Section -->
        
-        <section id="projects" class="projects">
-            <h2>Projects</h2>
-
-            <div class="project-cards">
-                <article class="project-card">
-                    <img
-                         src="assets/images/project-one.png"
-                        alt="Placeholder preview for the Personal Portfolio Website project"
-                        class="project-image"
-                    >
-
-                    <h3>Personal Portfolio Website</h3>
-
-                    <p class="project-description">
-                        A personal portfolio website currently being developed
-                        to showcase my skills and projects. It includes sections
-                        for About Me, Skills, Projects, and Contact.
-                    </p>
-                </article>
-
-                <article class="project-card">
-                <a  href="https://studyplanner-beryl.vercel.app" target="_blank" rel="noopener noreferrer">
-                    <img src="assets/images/study-planner.png" alt="Study Planner concept preview" class="project-image" loading="lazy">
-                
-                    <h3>Study Planner</h3>
-                
-                    <p class="project-description">
-                        A web application that helps students organize courses,
-                        track deadlines, and monitor academic progress.
-                    </p>
-                </a>
-                </article>
-            </div>
-        </section>
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+    
+        <p id="github-status" role="status" aria-atomic="true"></p>
+    
+        <button id="github-retry" type="button" hidden>
+            Try Again
+        </button>
+    
+        <div id="github-repositories" class="project-cards" aria-busy="true">
+            <a class="project-card" href="https://studyplanner-beryl.vercel.app" target="_blank" rel="noopener noreferrer">
+                <img src="assets/images/study-planner.png" alt="Study Planner website homepage" class="project-image"
+                    loading="lazy">
+    
+                <h3>Study Planner</h3>
+    
+                <p class="project-description">
+                    A web application that helps students organize courses,
+                    track deadlines, and monitor academic progress.
+                </p>
+            </a>
+        </div>
+    </section>
 
         <!-- Contact Section -->
     <section id="contact" class="contact">
