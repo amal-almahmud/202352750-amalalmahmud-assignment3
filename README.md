@@ -1,143 +1,162 @@
-# 202352750-amalalmahmud-assignment2
+# 202352750-amalalmahmud-assignment3
 
 ## Project Description
 
 This project is a personal portfolio website for Amal Almahmud, a KFUPM student developing her programming and web development skills.
 
-The website builds on Assignment 1 by adding interactive content, animations, improved contact form validation, and adjustments for smaller screens. It includes Home, About Me, Skills, Projects, and Contact sections.
+Assignment 3 builds on Assignment 2 by integrating the GitHub API, adding persistent light and dark themes, and updating the project cards with real project links.
 
-The portfolio uses HTML, CSS, and vanilla JavaScript. It runs directly in the browser without package installation or a build step.
+The website includes Home, About Me, Skills, Projects, and Contact sections. It uses HTML, CSS, and vanilla JavaScript without a framework or build step.
 
-## Phase 2 Features
+## Phase 3 Features
 
 | Requirement | Implementation |
 | --- | --- |
-| Dynamic Content | An interactive Skills circle reveals and hides skill labels based on user interaction. |
-| Data Handling | The contact form validates user input in the browser and displays a confirmation after valid input. |
-| Animations and Transitions | Skills expand around the central circle, and the introduction includes a repeating typing effect. |
-| Error Handling and User Feedback | The form displays individual field errors, a general message when all fields are empty, and a success message after valid input. |
+| API Integration | Fetches UniLink repository information from the GitHub API and displays it in a clickable project card. |
+| Complex Logic | Contact form validation combines required-field checks, name rules, email validation, field-specific feedback, and focus management. |
+| State Management | JavaScript manages the current theme, updates the interface, and saves the selected theme using localStorage. |
+| Error Handling | The API integration handles failed requests, unexpected responses, and a 15-second timeout, with a retry button. |
 
-### Interactive Skills Circle
+### GitHub API Integration
 
-The central Skills button reveals six skills: HTML, CSS, JavaScript, Java, Python, and UI/UX Design.
+The UniLink card displays the repository name and description retrieved from GitHub.
 
-Users can open the circle by hovering over the central button or selecting it. Clicking or tapping the button toggles the circle.
+While the request is running, a loading message is displayed. If the request fails, an error message and a Try Again button appear.
 
-For keyboard navigation, users can focus the button with Tab and press Enter or Space to toggle it. Escape closes the circle. It also closes when focus leaves the component, the mouse leaves the circle area, or the user selects an area outside it.
+Retrying replaces only the UniLink card and preserves the Study Planner card.
 
-### Typing Effect
+An internet connection is needed to load the repository information.
 
-The introduction types “Software Engineer” one letter at a time, pauses, clears the entire phrase at once, and repeats.
+### Theme State Management
 
-### Responsive Layout Adjustments
+The theme button switches between light and dark modes.
 
-On smaller screens, the introductory text and typing card are arranged in one column. The navigation links can wrap, both introductory buttons use the available width, and the card's badge is positioned inside its boundary.
+- In light mode, the button displays **Dark mode**.
+- In dark mode, the button displays **Light mode**.
+- The selected theme is saved in localStorage and restored when the website is reopened.
+- If browser storage is unavailable, switching themes still works for the current page session.
 
-### Project Cards
+### Existing Interactive Features
 
-The Projects section presents:
+- An interactive Skills circle reveals HTML, CSS, JavaScript, Java, Python, and UI/UX Design.
+- The Skills circle supports mouse hover, clicking, tapping, and keyboard interaction.
+- A repeating typing effect displays “Software Engineer.”
+- CSS media queries adjust the layout for smaller screens.
 
-- **Personal Portfolio Website:** the portfolio currently being developed.
-- **Study Planner:** a planned application for organizing study sessions, assignments, and deadlines.
+## Projects
 
-The project images are placeholders and will be replaced with actual project screenshots in a future update.
+### Study Planner
+
+A web application that helps students organize courses, track deadlines, and monitor academic progress.
+
+The card uses a screenshot of the actual website and opens the deployed application.
+
+[Open Study Planner](https://studyplanner-beryl.vercel.app)
+
+### UniLink
+
+A KFUPM student platform for discovering opportunities and building teams. The project is currently a frontend prototype.
+
+The card uses a CSS cover featuring the letter U, displays information fetched from GitHub, and opens the repository.
+
+[View UniLink on GitHub](https://github.com/amal-almahmud/UniLink)
 
 ## Project Structure
 
 | File or Folder | Purpose |
 | --- | --- |
-| `index.html` | Website content, navigation, sections, and contact form. |
-| `css/styles.css` | Colors, typography, layouts, animations, and media queries. |
-| `js/script.js` | Form validation, typing effect, and Skills circle interactions. |
-| `assets/images/` | Project preview images. |
-| `docs/technical-documentation.md` | Detailed technical documentation. |
-| `docs/ai-usage-report.md` | Detailed AI usage report. |
+| `index.html` | Website sections, navigation, theme button, project container, and contact form. |
+| `css/styles.css` | Layouts, colors, light and dark themes, animations, and media queries. |
+| `js/script.js` | Form validation, typing effect, Skills interaction, GitHub API integration, and theme state management. |
+| `assets/images/` | Project screenshots and image assets. |
+| `docs/technical-documentation.md` | Technical implementation and testing details. |
+| `docs/ai-usage-report.md` | AI usage log, reflections, and declaration. |
 | `README.md` | Project overview, setup instructions, and usage guide. |
 
 ## Setup Instructions
 
-### Option 1: Download the Repository
+### 1. Get the Project
 
-1. Select **Code → Download ZIP** on the repository page.
-2. Extract the downloaded ZIP file.
-3. Open the extracted project folder.
-4. Open `index.html` in a modern web browser.
-
-Keep the HTML file and its accompanying folders together so the stylesheet, JavaScript, and images load correctly.
-
-### Option 2: Clone with Git
-
-If Git is installed, run:
+Clone the repository:
 
 ```bash
-git clone https://github.com/amal-almahmud/202352750-amalalmahmud-assignment2.git
-cd 202352750-amalalmahmud-assignment2
+git clone https://github.com/amal-almahmud/202352750-amalalmahmud-assignment3.git
+cd 202352750-amalalmahmud-assignment3
 ```
 
-Then open `index.html` in a browser.
+Alternatively, select **Code → Download ZIP** on the repository page and extract the files.
 
-### Optional: Visual Studio Code
+### 2. Run Locally
 
-Open the project folder in Visual Studio Code. If the Live Server extension is installed, right-click `index.html` and select **Open with Live Server**.
+1. Open the project folder in Visual Studio Code.
+2. Install the **Live Server** extension if it is not already installed.
+3. Right-click `index.html` and select **Open with Live Server**.
+4. Open the local address provided by Live Server in a browser.
 
-Live Server is optional. The website also runs by opening the HTML file directly.
+No npm packages or build commands are required. Keep the project folders together so the stylesheet, script, and images load correctly.
 
 ## How to Use
 
 1. Use the navigation links to move between sections.
-2. Select **View My Projects** to move to the Projects section.
-3. Hover over, click, or tap the **Skills** button to explore the skills.
-4. Select **Contact Me** or use the navigation to reach the contact form.
-5. Enter a name, email address, and message, then select **Send Message**.
-6. Follow any validation messages and correct the affected fields.
+2. Select **Dark mode** or **Light mode** to change the theme.
+3. Hover over or select **Skills** to reveal the skill labels.
+4. With keyboard focus on Skills, press Enter or Space to toggle the circle. Press Escape to close it.
+5. Select the Study Planner card to open the live application or the UniLink card to open its GitHub repository.
+6. Complete the contact form and follow any validation messages.
+7. If the GitHub request fails, select **Try Again** to reload the UniLink information.
 
 ## Contact Form Validation
 
 | Field | Validation Rules |
 | --- | --- |
-| Name | Required. Must contain at least two letters. Supports letters from different languages, including Arabic, along with spaces, apostrophes, and hyphens. Numbers are not accepted. |
+| Name | Required. Must contain at least two letters. Supports Unicode letters, including Arabic, with spaces, apostrophes, and hyphens. Numbers are not accepted. |
 | Email | Required. Must pass the browser's basic email format validation. |
 | Message | Required. Must contain text rather than only whitespace. |
 
-### Feedback Behavior
+If all fields are empty, a general message asks the user to complete them. Otherwise, errors appear below the affected fields, and focus moves to the first invalid field.
 
-- If all fields are empty, one general message asks the user to complete all fields.
-- If individual fields are missing or invalid, messages appear below the affected fields.
-- After an invalid submission, focus moves to the first invalid field.
-- Editing a field with an error updates its feedback while preserving errors belonging to other fields.
-- When all fields are valid, a thank-you message appears and the form is reset.
+Editing a field with an error updates its feedback. Valid input produces a personalized thank-you message and resets the form.
 
-The contact form is a demonstration only. It does not send messages to a server or store submitted information.
+The form demonstrates client-side validation. It does not send email or submit information to a backend.
+
+## Performance Considerations
+
+- The JavaScript file loads with `defer`.
+- The Study Planner screenshot uses lazy loading.
+- The UniLink cover is created with CSS instead of an additional image download.
+- The website uses system fonts and vanilla JavaScript without a framework bundle.
 
 ## Testing
 
-### Checks During Development
+The following contact form tests were manually completed successfully:
 
-Contact form checks covered empty submissions, invalid names, invalid email formats, missing messages, and valid submissions. Field-specific error feedback was also checked during development.
-
-After updating the responsive CSS, the navigation and Home section were visually checked in a narrow-screen browser preview. All navigation links, both introductory buttons, and the complete typing card were visible in the inspected preview.
+| Test | Result |
+| --- | --- |
+| Submit with all fields empty. | A general completion message appears. |
+| Enter a one-letter name with other fields valid. | A name validation error appears. |
+| Enter an invalid email with other fields valid. | An email validation error appears. |
+| Leave the message empty with other fields valid. | A message validation error appears. |
+| Submit valid values in all fields. | A personalized thank-you message appears and the form resets. |
 
 ### Manual Testing Guide
 
 | Test | Expected Result |
 | --- | --- |
-| Hover over the Skills button, then leave the circle area. | Skills appear and then close. |
-| Focus the Skills button with Tab and press Enter or Space. | Skills toggle between open and closed. |
-| Press Escape while the Skills circle has keyboard focus. | Skills close. |
-| Submit the form with all fields empty. | One general message asks the user to complete all fields. |
-| Submit with some fields missing or invalid. | Individual errors appear below the affected fields. |
-| Correct one invalid field. | Its feedback updates while other field errors remain. |
-| Submit valid values in all fields. | A thank-you message appears and the form clears. |
-| Observe the typing effect. | The phrase types, pauses, clears at once, and repeats. |
-
+| Open the Projects section with an internet connection. | UniLink repository information loads. |
+| Simulate a failed GitHub request. | An error message and retry button appear. |
+| Restore the connection and select Try Again. | UniLink reloads without duplicating cards or removing Study Planner. |
+| Switch themes, refresh, and reopen the website. | The saved theme is restored. |
+| Select each project card. | The correct project destination opens in a new tab. |
+| Operate the Skills circle using the keyboard. | Enter or Space toggles it, and Escape closes it. |
+| Inspect the website at different screen widths and in another browser. | Content remains readable and controls remain usable. |
 
 ## AI Usage Summary
 
-ChatGPT and Kilo Code supported the original Assignment 1 portfolio.
+ChatGPT and Kilo Code supported the original Assignment 1 portfolio. ChatGPT also assisted with the interactive features and documentation in Assignment 2.
 
-During Assignment 2, ChatGPT helped develop and refine the interactive Skills circle, typing effect, contact form validation, responsive CSS, and documentation.
+During Assignment 3, ChatGPT assisted with the GitHub API integration, project card updates, theme state management, debugging, testing guidance, Git commands, and documentation.
 
-For further details, see the [AI Usage Report](docs/ai-usage-report.md).
+See the [AI Usage Report](docs/ai-usage-report.md) for the detailed usage log, modifications, reflections, and declaration.
 
 ## Documentation
 

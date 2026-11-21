@@ -2,10 +2,10 @@
 
 ## Project Structure
 
-- `index.html` contains the website content and sections.
-- `css/styles.css` contains the design, animations, and responsive layout.
-- `js/script.js` contains form validation, the typing effect, and the Skills circle interaction.
-- `assets/images/` contains the project placeholder images.
+- `index.html` contains the website content, sections, and theme button.
+- `css/styles.css` contains the design, animations, responsive layout, and light and dark themes.
+- `js/script.js` contains form validation, the typing effect, Skills circle interaction, GitHub API integration, and theme state management.
+- `assets/images/` contains project images, including the Study Planner website screenshot.
 - `docs/` contains the technical documentation and AI usage report.
 - `README.md` contains the project description, setup instructions, and usage guide.
 
@@ -13,9 +13,15 @@
 
 The website is a single HTML page with Home, About Me, Skills, Projects, and Contact sections.
 
-Semantic elements such as `header`, `nav`, `main`, `section`, `article`, and `footer` organize the content.
+Semantic elements such as `header`, `nav`, `main`, `section`, and `footer` organize the content.
 
 The Skills section contains a central button and a list of six skills.
+
+The navigation includes a button for switching between light and dark themes.
+
+The Projects section contains a Study Planner card that opens the deployed website. A UniLink card is generated using GitHub API data and opens the project repository.
+
+The Projects section also includes a loading status message and a retry button for failed API requests.
 
 The contact form contains Name, Email, and Message fields. Each field has a label and an area for its error message.
 
@@ -37,6 +43,10 @@ On smaller screens, the Home section changes to one column, navigation links can
 
 The typing card also uses smaller spacing and a smaller shadow to fit the available width.
 
+Dark theme styles use the `body.dark-mode` selector to change backgrounds, text, borders, and form colors.
+
+The UniLink card uses a navy CSS cover with a white U instead of an image file.
+
 ## JavaScript
 
 ### Contact Form Validation
@@ -52,6 +62,8 @@ If all fields are empty, one general message appears. Otherwise, errors appear b
 After an invalid submission, focus moves to the first invalid field. Editing a field with an error updates its feedback.
 
 Valid input produces a thank-you message and clears the form.
+
+These combined conditions and validation steps provide the project's complex logic.
 
 The form is a demonstration only. It does not send information to a server or store submitted data.
 
@@ -71,6 +83,30 @@ Enter or Space toggles the focused button. Escape closes the circle. Leaving the
 
 The script updates `aria-expanded` and `aria-hidden` to match the open or closed state.
 
+### GitHub API Integration
+
+The `loadUniLink()` function uses `fetch` with `async` and `await` to request UniLink repository information from the GitHub API.
+
+The returned name and description are displayed in a project card. The repository URL becomes the card's destination.
+
+A loading message appears during the request. Failed requests display an error message and a retry button.
+
+An `AbortController` cancels requests that take longer than 15 seconds.
+
+Before loading again, the previous UniLink card is removed to avoid duplicates. The Study Planner card remains in place.
+
+### Theme State Management
+
+The `currentTheme` variable stores the selected theme.
+
+The `renderTheme()` function adds or removes the `dark-mode` body class and updates the button text.
+
+In light mode, the button displays “Dark mode.” In dark mode, it displays “Light mode.”
+
+The selected theme is saved in localStorage using the key `amal-portfolio-theme` and restored when the website is reopened.
+
+Storage operations use `try/catch` so theme switching still works if browser storage is unavailable.
+
 ## Testing
 
 The original Assignment 1 version was tested in Microsoft Edge using responsive DevTools. Navigation links, project images, the contact form, and browser Console were checked during development.
@@ -78,5 +114,7 @@ The original Assignment 1 version was tested in Microsoft Edge using responsive 
 For Assignment 2, contact form checks covered empty fields, invalid names, invalid email formats, missing messages, and valid submissions. Individual field feedback was also checked.
 
 After the responsive CSS changes, the Home section and navigation were visually checked in a small-screen browser preview. The navigation links, introductory buttons, and complete typing card were visible.
+
+For Assignment 3, the contact form was tested again with empty fields, a one-letter name, an invalid email, a missing message, and valid input. All five tests produced the expected results.
 
 Further testing is still needed for the Skills interaction in the mobile preview, all sections at specific screen widths, and the updated website in another browser.
