@@ -307,3 +307,43 @@ async function loadUniLink() {
 
 githubRetry.addEventListener("click", loadUniLink);
 loadUniLink();
+
+// Theme state and persistent preference
+const themeToggle = document.querySelector("#theme-toggle");
+
+if (themeToggle) {
+    const themeStorageKey = "amal-portfolio-theme";
+    let currentTheme = "light";
+
+    // Restore the saved theme.
+    try {
+        if (localStorage.getItem(themeStorageKey) === "dark") {
+            currentTheme = "dark";
+        }
+    } catch {
+        // Use the default theme if storage is unavailable.
+    }
+
+    function renderTheme() {
+        const isDark = currentTheme === "dark";
+
+        document.body.classList.toggle("dark-mode", isDark);
+
+        themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+        themeToggle.removeAttribute("aria-pressed");
+    }
+
+    renderTheme();
+
+    themeToggle.addEventListener("click", function () {
+        currentTheme = currentTheme === "dark" ? "light" : "dark";
+
+        renderTheme();
+
+        try {
+            localStorage.setItem(themeStorageKey, currentTheme);
+        } catch {
+            // Switching still works without saving the preference.
+        }
+    });
+}
